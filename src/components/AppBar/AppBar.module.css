@@ -1,0 +1,21 @@
+.header {
+  gap: 32px;
+  font-size: 20px;
+  padding: 16px 24px;
+  background-color: #ffe5b8;
+  color: #ad5d4e;
+  font-weight: 700;
+}
+
+.box {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+}

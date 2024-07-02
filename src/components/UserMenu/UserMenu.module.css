@@ -1,0 +1,20 @@
+.greetingBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.button {
+  display: flex;
+  gap: 4px;
+  background-color: transparent;
+  color: #ad5d4e;
+  border-color: #ad5d4e;
+  font-weight: 700;
+}
+
+.button:hover,
+.button:focus {
+  color: #2f241f;
+  border-color: #2f241f;
+}

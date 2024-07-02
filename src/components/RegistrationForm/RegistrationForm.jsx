@@ -1,42 +1,48 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
-import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
+import { register } from "../../redux/auth/operations";
+import css from "./RegistrationForm.module.css";
 import toast from "react-hot-toast";
 
-const contactSchema = Yup.object().shape({
+const authSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  number: Yup.string()
-    .min(3, "Too short")
+  email: Yup.string()
+    .min(8, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  password: Yup.string()
+    .min(8, "Too short")
     .max(50, "Too long")
     .required("Required"),
 });
 
-const ContactForm = () => {
+const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const nameId = useId();
-  const numberId = useId();
+  const emailId = useId();
+  const passwordId = useId();
 
   const initialValues = {
     name: "",
-    number: "",
+    email: "",
+    password: "",
   };
 
-  const handleSubmit = (contact, actions) => {
-    console.log(contact);
-    dispatch(addContact(contact))
+  const handleSubmit = (userInfo, actions) => {
+    console.log(userInfo);
+    dispatch(register(userInfo))
       .unwrap()
       .then(() => {
-        toast.success("Contact added!");
+        toast.success("Registration successful!");
       })
       .catch(() => {
-        toast.error("Sorry, something went wrong.");
+        toast.error("The user is already registered");
       });
     actions.resetForm();
   };
@@ -45,7 +51,7 @@ const ContactForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={contactSchema}
+      validationSchema={authSchema}
     >
       <Form className={css.form}>
         <div className={css.input}>
@@ -54,22 +60,26 @@ const ContactForm = () => {
           <ErrorMessage name="name" as="span" />
         </div>
         <div className={css.input}>
-          <label htmlFor={numberId}>Number</label>
+          <label htmlFor={emailId}>Email</label>
+          <Field className={css.field} id={emailId} type="email" name="email" />
+          <ErrorMessage name="email" as="span" />
+        </div>
+        <div className={css.input}>
+          <label htmlFor={passwordId}>Password</label>
           <Field
             className={css.field}
-            id={numberId}
-            type="tel"
-            name="number"
-            pattern="[0-9\-]+$"
+            id={passwordId}
+            type="password"
+            name="password"
           />
           <ErrorMessage name="number" as="span" />
         </div>
         <button className={css.button} type="submit">
-          Add contact
+          Register
         </button>
       </Form>
     </Formik>
   );
 };
 
-export default ContactForm;
+export default RegistrationForm;

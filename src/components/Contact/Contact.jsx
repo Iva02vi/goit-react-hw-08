@@ -1,19 +1,23 @@
 import { FaPhoneAlt, FaUser } from "react-icons/fa";
+import { useState } from "react";
+import ModalDelete from "../ModalDelete/ModalDelete";
 import css from "./Contact.module.css";
-import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
 
 const Contact = ({ contactInfo: { id, name, number } }) => {
-  const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
   const formatNumber = (inputNumber) => {
-    const pattern = /(\d{3})(\d{2})(\d{2})/;
+    const pattern = /(\d{3})(\d{3})(\d{2})/;
     const formatedNumber = inputNumber.replace(pattern, "$1-$2-$3");
     return formatedNumber;
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteContact(id));
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -28,13 +32,10 @@ const Contact = ({ contactInfo: { id, name, number } }) => {
           {formatNumber(number)}
         </p>
       </div>
-      <button
-        className={css.button}
-        type="button"
-        onClick={() => handleDelete(id)}
-      >
+      <button className={css.button} type="button" onClick={handleOpen}>
         Delete
       </button>
+      <ModalDelete isOpen={isOpen} onClose={handleClose} id={id} />
     </div>
   );
 };
