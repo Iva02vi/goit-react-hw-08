@@ -34,11 +34,11 @@ const LoginForm = () => {
       .unwrap()
       .then(() => {
         toast.success("Login successful");
+        actions.resetForm();
       })
       .catch(() => {
         toast.error("Your enter wrong email or password");
       });
-    actions.resetForm();
   };
 
   return (

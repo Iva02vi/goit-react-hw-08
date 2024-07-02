@@ -40,11 +40,11 @@ const RegistrationForm = () => {
       .unwrap()
       .then(() => {
         toast.success("Registration successful!");
+        actions.resetForm();
       })
       .catch(() => {
-        toast.error("The user is already registered");
+        toast.error("You have entered invalid or registered data");
       });
-    actions.resetForm();
   };
 
   return (
