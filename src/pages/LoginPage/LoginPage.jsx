@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import LoginForm from "../../LoginForm/LoginForm";
-import { selectLoader } from "../../../redux/auth/selectors";
-import Loader from "../../Loader/Loader";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import { selectLoader } from "../../redux/auth/selectors";
+import Loader from "../../components/Loader/Loader";
 
 const LoginPage = () => {
   const loader = useSelector(selectLoader);

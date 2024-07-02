@@ -9,10 +9,14 @@ import RestrictedRoute from "../RestrictedRoute";
 import { refreshUser } from "../../redux/auth/operations";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
-const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
-const ContactsPage = lazy(() => import("../pages/ContactsPage/ContactsPage"));
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const RegisterPage = lazy(() =>
+  import("../../pages/RegisterPage/RegisterPage")
+);
+const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
+const ContactsPage = lazy(() =>
+  import("../../pages/ContactsPage/ContactsPage")
+);
 
 const App = () => {
   const dispatch = useDispatch();
